@@ -15,10 +15,35 @@ function add_sub_command {
 }
 
 rm state.js
-add_sub_command ec2 DescribeInstances
-add_sub_command ec2 DescribeInternetGateways
-add_sub_command ec2 DescribeKeyPairs
-add_sub_command ec2 DescribeRouteTables
-add_sub_command ec2 DescribeSecurityGroups
-add_sub_command ec2 DescribeSubnets
+add_sub_command ec2 DescribeTags
 add_sub_command ec2 DescribeVpcs
+add_sub_command ec2 DescribeHosts
+add_sub_command ec2 DescribeFleets
+add_sub_command ec2 DescribeRegions
+add_sub_command ec2 DescribeSubnets
+add_sub_command ec2 DescribeVolumes
+add_sub_command ec2 DescribeAddresses
+add_sub_command ec2 DescribeFlowLogs
+add_sub_command ec2 DescribeInstances
+add_sub_command ec2 DescribeKeyPairs
+add_sub_command ec2 DescribeFpgaImages
+add_sub_command ec2 DescribeDhcpOptions
+add_sub_command ec2 DescribeElasticGpus
+add_sub_command ec2 DescribeNatGateways
+add_sub_command ec2 DescribeNetworkAcls
+add_sub_command ec2 DescribePrefixLists
+add_sub_command ec2 DescribeRouteTables
+add_sub_command ec2 DescribeVpnGateways
+add_sub_command ec2 DescribeVolumeStatus
+add_sub_command ec2 DescribeVpcEndpoints
+add_sub_command ec2 DescribeInstanceStatus
+add_sub_command ec2 DescribeSecurityGroups
+add_sub_command ec2 DescribeVpnConnections
+add_sub_command ec2 DescribeLaunchTemplates
+add_sub_command ec2 DescribeMovingAddresses
+add_sub_command ec2 DescribePlacementGroups
+add_sub_command ec2 DescribeCustomerGateways
+add_sub_command ec2 DescribeInternetGateways
+add_sub_command ec2 DescribeAvailabilityZones
+add_sub_command ec2 DescribeNetworkInterfaces
+add_sub_command ec2 DescribeVpcPeeringConnections
