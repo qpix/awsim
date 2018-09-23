@@ -14,13 +14,21 @@
 			<table id="suggester"></table>
 		</div>
 		<script>
-			document.getElementById('prompt').style.width = document.getElementById('terminal-main').offsetWidth - document.getElementById('promptText').offsetWidth - 1 + 'px';
+			var terminal = document.getElementById('terminal-main');
 			var output = document.getElementById('terminal-output');
 			var descriptor = document.getElementById('terminal-descriptor');
+
+			output.print = function(str) {
+				this.innerHTML += '<br />' + str;
+				terminal.scrollTop = terminal.scrollHeight;
+			}
+
 			descriptor.clear = function(){
 				this.style.display = 'none';
 				this.innerHTML = '';
+				terminal.scrollTop = terminal.scrollHeight;
 			};
+
 			descriptor.update = function(str) {
 				if (str) {
 					this.innerHTML = str;
@@ -28,7 +36,10 @@
 				} else {
 					this.clear();
 				}
+				terminal.scrollTop = terminal.scrollHeight;
 			};
+
+			document.getElementById('prompt').style.width = terminal.offsetWidth - document.getElementById('promptText').offsetWidth - 1 + 'px';
 		</script>
 		<script src="awsim.js"></script>
 		<script src="services/ec2.js"></script>

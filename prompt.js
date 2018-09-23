@@ -5,11 +5,11 @@ prompt.addEventListener('keyup', function (event) {
 	if (event.keyCode == 13) {
 		suggester.update(['']);
 		suggester.print();
-		output.innerHTML += '<br>aws&gt; '+ prompt.value;
+		output.print('aws&gt; '+ prompt.value);
 
 		var command = CreateCommandArray(this.value);
 		this.commandHistory.unshift(command);
-		output.innerHTML += '<br>' + awsim._ExecuteCommand(command);
+		output.print(awsim._ExecuteCommand(command));
 		this.value = '';
 	}
 	else if (event.keyCode == 38) {
@@ -17,7 +17,6 @@ prompt.addEventListener('keyup', function (event) {
 			this.commandHistoryPointer += 1;
 			if (this.commandHistoryPointer == this.commandHistory.length)
 				this.commandHistoryPointer -= 1;
-			console.log(this.commandHistoryPointer);
 			this.value = this.commandHistory[this.commandHistoryPointer].join(' ');
 		}
 		else {
