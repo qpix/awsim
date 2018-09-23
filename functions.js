@@ -11,7 +11,6 @@ function DescribeIdError (requestedIds, existingIds, idName, idRegex) {
 	return false;
 }
 
-awsim['ec2']['operations']['DescribeInstances']['_options'] = {};
 awsim['ec2']['operations']['DescribeInstances']['_options']['--instance-ids'] = () => {
 	var state = awsim['ec2']['operations']['DescribeInstances']._state;
 	var result = [];

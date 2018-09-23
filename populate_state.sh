@@ -10,6 +10,7 @@ function add_sub_command {
 
 	echo Adding subcommand: aws $1 $CLI_SUB_COMMAND
 	echo "awsim['$1']['operations']['$2']['_state'] = JSON.parse(atob('$(aws $1 $CLI_SUB_COMMAND | base64)'));" >> state.js
+	echo "awsim['$1']['operations']['$2']['_options'] = {};" >> state.js
 }
 
 rm state.js
