@@ -34,14 +34,18 @@ function CreateCommandObject (command) {
 }
 
 function OperationToCommand (str) {
-	for (var i = 65; i < 91; i++)
-		str = str.replace(String.fromCharCode(i), '-' + String.fromCharCode(i + 32));
+	for (var i = 65; i < 91; i++) {
+		var RegEx = new RegExp(String.fromCharCode(i), 'g')
+		str = str.replace(RegEx, '-' + String.fromCharCode(i + 32));
+	}
 	return str.substr(1);
 }
 
 function CommandToOperation (str) {
-	for (var i = 65; i < 91; i++)
-		str = str.replace('-' + String.fromCharCode(i + 32), String.fromCharCode(i));
+	for (var i = 65; i < 91; i++) {
+		var RegEx = new RegExp('-' + String.fromCharCode(i + 32), 'g');
+		str = str.replace(RegEx, String.fromCharCode(i));
+	}
 	return String.fromCharCode(str.charCodeAt(0) - 32) + str.substr(1);
 }
 
