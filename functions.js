@@ -1,6 +1,8 @@
 function DescribeIdError (requestedIds, existingIds, idName, idRegex) {
 	for (var i in requestedIds) {
 		var parameter = requestedIds[i];
+		if (parameter == '')
+			continue;
 		if (!parameter.match(idRegex))
 			return 'An error occurred (Invalid' + idName + 'ID.Malformed) when calling the Describe' + idName + ' operation: Invalid id: "' + parameter + '"';
 		if (existingIds.indexOf(parameter) == -1)
