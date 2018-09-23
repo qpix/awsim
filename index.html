@@ -19,7 +19,7 @@
 			var descriptor = document.getElementById('terminal-descriptor');
 
 			output.print = function(str) {
-				this.innerHTML += '<br />' + str;
+				this.innerHTML += '<pre>' + str + '</pre>';
 				terminal.scrollTop = terminal.scrollHeight;
 			}
 
