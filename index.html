@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>AWSIM</title>
+		<link rel="stylesheet" type="text/css" href="awsim.css">
+	</head>
+	<body>
+		Test
+		<div id="terminal-main" onClick="document.getElementById('prompt').focus()">
+			<div id="terminal-output">Copyright 2018 (C) Christian Åberg</div>
+			<div id="promptText">aws&gt;&nbsp;</div><input type="text" id="prompt"/>
+			<div id="terminal-descriptor"></div>
+			<table id="suggester"></table>
+		</div>
+		<script>
+			document.getElementById('prompt').style.width = document.getElementById('terminal-main').offsetWidth - document.getElementById('promptText').offsetWidth - 1 + 'px';
+			var output = document.getElementById('terminal-output');
+			var descriptor = document.getElementById('terminal-descriptor');
+			descriptor.clear = function(){
+				this.style.display = 'none';
+				this.innerHTML = '';
+			};
+			descriptor.update = function(str) {
+				if (str) {
+					this.innerHTML = str;
+					this.style.display = 'block';
+				} else {
+					this.clear();
+				}
+			};
+		</script>
+		<script src="awsim.js"></script>
+		<script src="services/ec2.js"></script>
+		<script src="state.js"></script>
+		<script src="functions.js"></script>
+		<script src="suggester.js"></script>
+		<script src="prompt.js"></script>
+	</body>
+</html>

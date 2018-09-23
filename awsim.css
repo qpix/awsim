@@ -1,0 +1,68 @@
+#terminal-main {
+	background-color: #252525;
+	color: white;
+	font-family: monospace;
+	font-size: '12px';
+	width: 800px;
+	height: 600px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	position: relative;
+}
+
+pre {
+	margin: 0;
+	padding: 0;
+}
+
+#terminal-output {
+}
+
+#terminal-descriptor {
+	border-top: 1px solid white;
+	margin-top: 125px;
+	margin-bottom: 25px;
+	display: none;
+}
+
+#suggester {
+	position: absolute;
+	border-collapse: collapse;
+}
+
+#suggester .active .command {
+	color: black;
+	background-color: #1bafae;
+}
+
+#suggester .passive .command {
+	color: white;
+	background-color: #128786;
+}
+
+#suggester .active .description {
+	color: black;
+	background-color: #1bafae;
+}
+
+#suggester .passive .description {
+	color: white;
+	background-color: #1bafae;
+}
+
+#prompt {
+	width: 100%;
+	border: 0;
+	padding: 0;
+	margin: 0;
+	background-color: #252525;
+	color: white;
+	outline: none;
+	font-family: monospace;
+	font-size: 12px;
+	position: relative;
+}
+
+#promptText {
+	display: inline-block;
+}
