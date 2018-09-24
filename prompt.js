@@ -4,7 +4,7 @@ prompt.commandHistoryPointer = 0;
 prompt.addEventListener('keyup', function (event) {
 	if (event.keyCode == 13) {
 		promptText.style.display = 'none';
-		this.readonly = true;
+		this.readOnly = true;
 		suggester.update(['']);
 		suggester.print();
 		output.print('aws&gt; '+ prompt.value);
@@ -12,10 +12,10 @@ prompt.addEventListener('keyup', function (event) {
 		var command = CreateCommandArray(this.value);
 		this.value = '';
 		this.commandHistory.unshift(command);
-		setTimeout(function () {
+		setTimeout(() => {
 			output.print(awsim._ExecuteCommand(command));
 			promptText.style.display = 'inline-block';
-			this.readonly = false;
+			this.readOnly = false;
 		}, 2500);
 	}
 	else if (event.keyCode == 38) {
