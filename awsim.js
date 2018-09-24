@@ -52,10 +52,16 @@ function CommandToOperation (str) {
 var awsim = {
 	_ExecuteCommand: function(CommandArray) {
 		try {
-			return this[CommandArray[0]]['operations'][CommandToOperation(CommandArray[1])]['_execute'](CreateCommandObject(CommandArray));
+			var command = CommandArray[0];
+			var operation = CommandToOperation(CommandArray[1]);
+			if (this[command]['operations'][operation]['_execute'] == undefined)
+				return 'An error occurred (AccessDenied) when calling the ' + operation + ' operation: Access to the resource is denied.';
+			return this[command]['operations'][operation]['_execute'](CreateCommandObject(CommandArray));
 		}
 		catch (err) {
-			return 'Unauthorized';
+			return `
+usage: aws [options] <command> <subcommand> [<subcommand> ...] [parameters]
+aws: error: argument command: Invalid choice`;
 		}
 	},
 	_ListCommands: function() {
