@@ -35,8 +35,10 @@ function CreateCommandObject (command) {
 }
 
 function OperationToCommand (str) {
+	var RegEx = new RegExp('ID', 'g');
+	str = str.replace(RegEx, 'Id');
 	for (var i = 65; i < 91; i++) {
-		var RegEx = new RegExp(String.fromCharCode(i), 'g')
+		var RegEx = new RegExp(String.fromCharCode(i), 'g');
 		str = str.replace(RegEx, '-' + String.fromCharCode(i + 32));
 	}
 	return str.substr(1);
