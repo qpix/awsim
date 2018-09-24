@@ -11,6 +11,7 @@ function DescribeIdError (requestedIds, existingIds, idName, idRegex) {
 	return false;
 }
 
+///// ec2:DescribeInstances
 awsim['ec2']['operations']['DescribeInstances']['_options']['--instance-ids'] = () => {
 	var state = awsim['ec2']['operations']['DescribeInstances']._state;
 	var result = [];
@@ -31,4 +32,21 @@ awsim['ec2']['operations']['DescribeInstances']['_execute'] = (command) => {
 	}
 
 	return '<pre>' + JSON.stringify(state, null, 1) + '</pre>';
+};
+
+///// dynamodb:DescribeTable
+awsim['dynamodb']['operations']['DescribeTable']['_options']['--table-name'] = () => {
+	var result = [];
+	for (var key in awsim['dynamodb']['operations']['DescribeTable']['_state'])
+		result.push(key.split(' ')[1]);
+	return result;
+};
+awsim['dynamodb']['operations']['DescribeTable']['_execute'] = (command) => {
+	console.log(command);
+	if (command.options['table-name'] == undefined || command.options['table-name'].length > 1)
+		return 'aws: error: argument --table-name: expected one argument';
+	var table = awsim['dynamodb']['operations']['DescribeTable']['_state']['--table-name ' + command.options['table-name']];
+	if (table == undefined)
+		return 'An error occurred (ResourceNotFoundException) when calling the DescribeTable operation: Requested resource not found: Table: ' + command.options['table-name'] + ' not found';
+	return '<pre>' + JSON.stringify(table, null, 1) + '</pre>';
 };
