@@ -28,11 +28,29 @@ function add_sub_command_with_required_option {
 	done
 	CLI_SUB_COMMAND=$(echo $CLI_SUB_COMMAND | sed 's/^-//')
 
-	echo Adding subcommand with required option: aws $1 $CLI_SUB_COMMAND $3
-	echo "awsim['$1']['operations']['$2']['_state']['$3'] = JSON.parse(atob('$(aws $1 $CLI_SUB_COMMAND $3 | base64)'));" >> state.js
+	echo Adding subcommand with required option: aws $1 $CLI_SUB_COMMAND $3 $4
+	echo "awsim['$1']['operations']['$2']['_state']['$3 $4'] = JSON.parse(atob('$(aws $1 $CLI_SUB_COMMAND $3 $4 | base64)'));" >> state.js
+	echo "\
+awsim['$1']['operations']['$2']['_options']['$3'] = () => {\
+        var result = [];\
+        for (var key in awsim['$1']['operations']['$2']['_state'])\
+                result.push(key.split(' ')[1]);\
+        return result;\
+};\
+awsim['$1']['operations']['$2']['_execute'] = (command) => {\
+	var optionName = '$3'.replace('--','');\
+        if (command.options[optionName] == undefined || command.options[optionName][0] == undefined || command.options[optionName].length > 1)\
+                return 'aws: error: argument $3: expected one argument';\
+	var optionValue = command['options'][optionName][0];\
+        var resource = awsim['$1']['operations']['$2']['_state']['$3 ' + optionValue];\
+        if (resource == undefined)\
+                return 'An error occurred (ResourceNotFoundException) when calling the $2 operation: Requested resource not found: ' + optionValue + ' not found';\
+        return '<pre>' + JSON.stringify(resource, null, 1) + '</pre>';\
+};" >> state.js
 }
 
 rm state.js
+#!#!#! EC2
 add_sub_command ec2 DescribeVpcs
 add_sub_command ec2 DescribeRegions
 add_sub_command ec2 DescribeSubnets
@@ -49,6 +67,21 @@ add_sub_command ec2 DescribePlacementGroups
 add_sub_command ec2 DescribeInternetGateways
 add_sub_command ec2 DescribeAvailabilityZones
 add_sub_command ec2 DescribeNetworkInterfaces
-#DESCRIBE_TABLE
+
+#!#!#! IAM
+add_sub_command iam ListInstanceProfiles
+add_sub_command iam ListUsers
+
+prepare_sub_command_with_required_option iam ListInstanceProfilesForRole
+add_sub_command_with_required_option iam ListInstanceProfilesForRole --role-name WebServerRole
+prepare_sub_command_with_required_option iam ListAttachedRolePolicies
+add_sub_command_with_required_option iam ListAttachedRolePolicies --role-name WebServerRole
+
+#!#!#! ELBV2
+
+#!#!#! AUTOSCALING
+
+#!#!#! DYNAMODB
+
 prepare_sub_command_with_required_option dynamodb DescribeTable
-add_sub_command_with_required_option dynamodb DescribeTable '--table-name WebServerDB'
+add_sub_command_with_required_option dynamodb DescribeTable --table-name WebServerDB
