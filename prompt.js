@@ -3,14 +3,20 @@ prompt.commandHistory = [];
 prompt.commandHistoryPointer = 0;
 prompt.addEventListener('keyup', function (event) {
 	if (event.keyCode == 13) {
+		promptText.style.display = 'none';
+		this.readonly = true;
 		suggester.update(['']);
 		suggester.print();
 		output.print('aws&gt; '+ prompt.value);
 
 		var command = CreateCommandArray(this.value);
-		this.commandHistory.unshift(command);
-		output.print(awsim._ExecuteCommand(command));
 		this.value = '';
+		this.commandHistory.unshift(command);
+		setTimeout(function () {
+			output.print(awsim._ExecuteCommand(command));
+			promptText.style.display = 'inline-block';
+			this.readonly = false;
+		}, 2500);
 	}
 	else if (event.keyCode == 38) {
 		if (this.value == '' || this.commandHistoryPointer >= 0) {
