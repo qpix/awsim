@@ -1,3 +1,19 @@
+body {
+	font-family: sans-serif;
+	font-size: 12px;
+}
+
+#topology {
+	height: 200px;
+}
+
+#question {
+	width: 800px;
+	padding: 10px;
+	margin: 0 auto;
+	border: 1px solid black;
+}
+
 #terminal-main {
 	background-color: #252525;
 	color: white;
