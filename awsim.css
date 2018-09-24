@@ -22,6 +22,8 @@ pre {
 	border-top: 1px solid white;
 	margin-bottom: 25px;
 	display: none;
+	max-height: 400px;
+	overflow: hidden;
 }
 
 #suggester {
