@@ -26,7 +26,8 @@ function CreateCommandObject (command) {
                                 CommandObject.options[currentOption] = [];
                         }
                         else {
-                                CommandObject.options[currentOption].push(command[i]);
+				if (command[i] != '')
+					CommandObject.options[currentOption].push(command[i]);
                         }
                 }
         }
