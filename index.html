@@ -33,27 +33,26 @@ var descriptor = document.getElementById('terminal-descriptor');
 
 output.print = function(str) {
 	this.innerHTML += '<pre>' + str + '</pre>';
-		terminal.scrollTop = terminal.scrollHeight;
-	}
-
-	descriptor.clear = function(){
-		this.style.display = 'none';
-		this.innerHTML = '';
-		terminal.scrollTop = terminal.scrollHeight;
-	};
-
-	descriptor.update = function(str) {
-		if (str) {
-			this.innerHTML = str;
-			this.style.display = 'block';
-		} else {
-			this.clear();
-		}
-		terminal.scrollTop = terminal.scrollHeight;
-	};
-
-	document.getElementById('prompt').style.width = terminal.offsetWidth - document.getElementById('promptText').offsetWidth - 1 + 'px';
+	terminal.scrollTop = terminal.scrollHeight;
 }
+
+descriptor.clear = function(){
+	this.style.display = 'none';
+	this.innerHTML = '';
+	terminal.scrollTop = terminal.scrollHeight;
+};
+
+descriptor.update = function(str) {
+	if (str) {
+		this.innerHTML = str;
+		this.style.display = 'block';
+	} else {
+		this.clear();
+	}
+	terminal.scrollTop = terminal.scrollHeight;
+};
+
+document.getElementById('prompt').style.width = terminal.offsetWidth - document.getElementById('promptText').offsetWidth - 1 + 'px';
 </script>
 <script src="awsim.js"></script>
 <!-- BEGIN SERVICES -->
