@@ -51,37 +51,59 @@ awsim['$1']['operations']['$2']['_execute'] = (command) => {\
 
 rm state.js
 #!#!#! EC2
-add_sub_command ec2 DescribeVpcs
-add_sub_command ec2 DescribeRegions
-add_sub_command ec2 DescribeSubnets
-add_sub_command ec2 DescribeVolumes
-add_sub_command ec2 DescribeAddresses
-add_sub_command ec2 DescribeInstances
-add_sub_command ec2 DescribeKeyPairs
-add_sub_command ec2 DescribeNatGateways
-add_sub_command ec2 DescribeNetworkAcls
-add_sub_command ec2 DescribeRouteTables
-add_sub_command ec2 DescribeSecurityGroups
-add_sub_command ec2 DescribeLaunchTemplates
-add_sub_command ec2 DescribePlacementGroups
-add_sub_command ec2 DescribeInternetGateways
-add_sub_command ec2 DescribeAvailabilityZones
-add_sub_command ec2 DescribeNetworkInterfaces
+add_sub_command					ec2 DescribeVpcs
+add_sub_command					ec2 DescribeRegions
+add_sub_command					ec2 DescribeSubnets
+add_sub_command					ec2 DescribeVolumes
+add_sub_command					ec2 DescribeAddresses
+add_sub_command					ec2 DescribeInstances
+add_sub_command					ec2 DescribeInternetGateways
+add_sub_command					ec2 DescribeKeyPairs
+add_sub_command					ec2 DescribeNatGateways
+add_sub_command					ec2 DescribeNetworkAcls
+add_sub_command					ec2 DescribeRouteTables
+add_sub_command					ec2 DescribeSecurityGroups
+add_sub_command					ec2 DescribeLaunchTemplates
+add_sub_command					ec2 DescribePlacementGroups
+add_sub_command					ec2 DescribeInternetGateways
+add_sub_command					ec2 DescribeAvailabilityZones
+add_sub_command					ec2 DescribeNetworkInterfaces
 
 #!#!#! IAM
-add_sub_command iam ListInstanceProfiles
-add_sub_command iam ListUsers
+add_sub_command					iam ListAccessKeys
+add_sub_command					iam ListInstanceProfiles
+add_sub_command					iam ListUsers
+add_sub_command					iam ListRoles
 
-prepare_sub_command_with_required_option iam ListInstanceProfilesForRole
-add_sub_command_with_required_option iam ListInstanceProfilesForRole --role-name WebServerRole
-prepare_sub_command_with_required_option iam ListAttachedRolePolicies
-add_sub_command_with_required_option iam ListAttachedRolePolicies --role-name WebServerRole
+prepare_sub_command_with_required_option	iam ListAttachedRolePolicies
+add_sub_command_with_required_option		iam ListAttachedRolePolicies --role-name WebServerRole
+prepare_sub_command_with_required_option	iam ListInstanceProfilesForRole
+add_sub_command_with_required_option		iam ListInstanceProfilesForRole --role-name WebServerRole
+prepare_sub_command_with_required_option	iam ListRolePolicies
+add_sub_command_with_required_option		iam ListRolePolicies --role-name WebServerRole
 
 #!#!#! ELBV2
+add_sub_command					elbv2 DescribeLoadBalancers
+add_sub_command					elbv2 DescribeTargetGroups
+
+prepare_sub_command_with_required_option	elbv2 DescribeLoadBalancerAttributes
+add_sub_command_with_required_option		elbv2 DescribeLoadBalancerAttributes --load-balancer-arn arn:aws:elasticloadbalancing:us-east-1:338556236700:loadbalancer/app/WebServerLoadBalancer/0f8cb492fbba1e0c
+prepare_sub_command_with_required_option 	elbv2 DescribeTargetGroupAttributes
+add_sub_command_with_required_option 		elbv2 DescribeTargetGroupAttributes --target-group-arn arn:aws:elasticloadbalancing:us-east-1:338556236700:targetgroup/WebServerTargetGroup/a62d8d55c2e2d2e5
 
 #!#!#! AUTOSCALING
+add_sub_command					autoscaling DescribeAutoScalingGroups
+add_sub_command					autoscaling DescribeAutoScalingInstances
+add_sub_command					autoscaling DescribeLaunchConfigurations
+
+prepare_sub_command_with_required_option	autoscaling DescribeLoadBalancerTargetGroups
+add_sub_command_with_required_option		autoscaling DescribeLoadBalancerTargetGroups --auto-scaling-group-name WebServerAutoScalingGroup
+prepare_sub_command_with_required_option	autoscaling DescribeLoadBalancers
+add_sub_command_with_required_option		autoscaling DescribeLoadBalancers --auto-scaling-group-name WebServerAutoScalingGroup
 
 #!#!#! DYNAMODB
+add_sub_command dynamodb ListTables
 
 prepare_sub_command_with_required_option dynamodb DescribeTable
-add_sub_command_with_required_option dynamodb DescribeTable --table-name WebServerDB
+add_sub_command_with_required_option		dynamodb DescribeTable --table-name VerySecretTable
+add_sub_command_with_required_option		dynamodb DescribeTable --table-name WebServerDB
