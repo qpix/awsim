@@ -7,11 +7,21 @@ body {
 	height: 200px;
 }
 
-#question {
+#table-main {
 	width: 800px;
-	padding: 10px;
 	margin: 0 auto;
-	border: 1px solid black;
+}
+
+#table-question {
+	padding: 10px;
+}
+
+#table-header {
+	font-size: 20px;
+	color: white;
+	background-image: linear-gradient(Blue, DarkBlue);
+	font-weight: bold;
+	font-style: italic;
 }
 
 #terminal-main {

@@ -6,47 +6,56 @@
 		<link rel="stylesheet" type="text/css" href="awsim.css">
 	</head>
 	<body>
-		<div id="question">
-			<img src="AWS.png" alt="AWS Topology" id="topology" />
-			<p>A junior cloud developer is trying to set up a web service solution as visualised by the figure above.</p>
-			<p>The developer has created a web application in Node.js. The web application is deployed automatically across a fleet of EC2 Auto Scaling instances running Amazon Linux 2. An Elastic Load Balancer is configured to load balance between the instances. The web applications state is stored in a DynamoDB table named WebServerDB.</p>
-			<p>The web application follows AWS Security Best Practices in regards to how it receives credentials for accessing DynamoDB.</p>
-			<p>When testing the solution, the developer notice that the web application can not access DynamoDB properly. The web application crashes whenever it tries to insert items into the WebServerDB-table. However, reading from the table work without any issues.</p>
-			<div id="terminal-main" onClick="document.getElementById('prompt').focus()">
-				<div id="terminal-output">Copyright 2018 (C) Christian Åberg<br>----------------------------------</div>
-				<div id="promptText">aws&gt;&nbsp;</div><input type="text" id="prompt"/>
-				<div id="terminal-descriptor"></div>
-				<table id="suggester"></table>
-			</div>
-			<script>
-				var terminal = document.getElementById('terminal-main');
-				var output = document.getElementById('terminal-output');
-				var descriptor = document.getElementById('terminal-descriptor');
+		<table border="1" id="table-main">
+			<tr><td id="table-header">AWS SIMLET</td></tr>
+			<tr>
+				<td id="table-question">
+					<img src="AWS.png" alt="AWS Topology" id="topology" />
+					<p>A junior cloud developer is trying to set up a web service solution as visualised by the figure above.</p>
+					<p>The developer has created a web application in Node.js. The web application is deployed automatically across a fleet of EC2 Auto Scaling instances running Amazon Linux 2. An Elastic Load Balancer is configured to load balance between the instances. The web applications state is stored in a DynamoDB table named WebServerDB.</p>
+					<p>The web application follows AWS Security Best Practices in regards to how it receives credentials for accessing DynamoDB.</p>
+					<p>When testing the solution, the developer notice that the web application can not access DynamoDB properly. The web application crashes whenever it tries to insert items into the WebServerDB-table. However, reading from the table work without any issues.</p>
+					<p>Below is an AWS-shell connected to the infrastructure:</p>
+					<div id="terminal-main" onClick="document.getElementById('prompt').focus()">
+						<div id="terminal-output">Copyright 2018 (C) Christian Åberg<br>----------------------------------</div>
+						<div id="promptText">aws&gt;&nbsp;</div><input type="text" id="prompt"/>
+						<div id="terminal-descriptor"></div>
+						<table id="suggester"></table>
+					</div>
+					<p></p>
+				</td>
+			</tr>
+		</table>
+<script>
+var terminal = document.getElementById('terminal-main');
+var output = document.getElementById('terminal-output');
+var descriptor = document.getElementById('terminal-descriptor');
 
-				output.print = function(str) {
-					this.innerHTML += '<pre>' + str + '</pre>';
-					terminal.scrollTop = terminal.scrollHeight;
-				}
+output.print = function(str) {
+	this.innerHTML += '<pre>' + str + '</pre>';
+		terminal.scrollTop = terminal.scrollHeight;
+	}
 
-				descriptor.clear = function(){
-					this.style.display = 'none';
-					this.innerHTML = '';
-					terminal.scrollTop = terminal.scrollHeight;
-				};
+	descriptor.clear = function(){
+		this.style.display = 'none';
+		this.innerHTML = '';
+		terminal.scrollTop = terminal.scrollHeight;
+	};
 
-				descriptor.update = function(str) {
-					if (str) {
-						this.innerHTML = str;
-						this.style.display = 'block';
-					} else {
-						this.clear();
-					}
-					terminal.scrollTop = terminal.scrollHeight;
-				};
+	descriptor.update = function(str) {
+		if (str) {
+			this.innerHTML = str;
+			this.style.display = 'block';
+		} else {
+			this.clear();
+		}
+		terminal.scrollTop = terminal.scrollHeight;
+	};
 
-				document.getElementById('prompt').style.width = terminal.offsetWidth - document.getElementById('promptText').offsetWidth - 1 + 'px';
-			</script>
-			<script src="awsim.js"></script>
+	document.getElementById('prompt').style.width = terminal.offsetWidth - document.getElementById('promptText').offsetWidth - 1 + 'px';
+}
+</script>
+<script src="awsim.js"></script>
 <!-- BEGIN SERVICES -->
 <script src="services/acm-pca.js"></script>
 <script src="services/acm.js"></script>
@@ -194,10 +203,9 @@
 <script src="services/workspaces.js"></script>
 <script src="services/xray.js"></script>
 <!-- END SERVICES -->
-			<script src="state.js"></script>
-			<script src="functions.js"></script>
-			<script src="suggester.js"></script>
-			<script src="prompt.js"></script>
-		</div>
+<script src="state.js"></script>
+<script src="functions.js"></script>
+<script src="suggester.js"></script>
+<script src="prompt.js"></script>
 	</body>
 </html>
