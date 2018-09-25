@@ -22,7 +22,16 @@
 						<div id="terminal-descriptor"></div>
 						<table id="suggester"></table>
 					</div>
-					<p></p>
+					<p>Use the shell above to determine the cause of the web applications issues with DynamoDB. What is the most likely reason for the problems?</p>
+					<script>
+						function success () { alert('Certification passed!'); }
+						function failure () { alert('Please, select another option.'); }
+					</script>
+					<p><input type="button" value="A)" onclick="failure()"> The administrator needs to change the active role for the EC2 instances.</p>
+					<p><input type="button" value="B)" onclick="failure()"> The instances security group is dropping DynamoDB packets.</p>
+					<p><input type="button" value="C)" onclick="success()"> The Auto Scaling Groups Launch Configuration contains an IamInstanceProfile with insufficient permissions.</p>
+					<p><input type="button" value="D)" onclick="failure()"> The administrator needs to increase the WriteCapacityUnits of the WebServerDB-table in DynamoDB</p>
+					<p><input type="button" value="E)" onclick="failure()"> The administrator needs to increase the WriteCapacityUnits of the VerySecretTable-table in DynamoDB</p>
 				</td>
 			</tr>
 		</table>
